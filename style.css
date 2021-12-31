@@ -106,3 +106,7 @@ form > *,
 .checked {
 	opacity: 0.5;
 }
+
+.todo:hover {
+	box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.2);
+}

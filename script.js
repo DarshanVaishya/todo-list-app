@@ -12,6 +12,7 @@ todoItems.addEventListener("click", (event) => {
 
 	if (item.classList[1] === "checkBtn") {
 		todo.classList.toggle("checked");
+		updateTodoClass(todo);
 	} else if (item.classList[1] === "deleteBtn") {
 		todo.classList.add("fall");
 		todo.addEventListener("transitionend", todo.remove);
@@ -20,18 +21,18 @@ todoItems.addEventListener("click", (event) => {
 });
 
 function loadTodos() {
-	let todos = JSON.parse(localStorage.getItem("todos")) ?? [];
-	todos.forEach((todo) => {
-		addTodo(undefined, todo);
-	});
+	let todos = getStoredTodos();
+	for (let [todo, isCompleted] of Object.entries(todos)) {
+		addTodo(undefined, todo, isCompleted);
+	}
 }
 loadTodos();
-
-function addTodo(event, text = undefined) {
+function addTodo(event, text = undefined, completed = "") {
 	if (event) event.preventDefault();
 	if (event && !todoInput.value) return;
 	let todo = `
-  <div class="todo"> <li class="item">${text ?? todoInput.value}</li>
+  <div class="todo ${completed}">
+		<li class="item">${text ?? todoInput.value}</li>
     <button class="btn checkBtn">
       <i class="fas fa-check"></i>
     </button>
@@ -46,15 +47,28 @@ function addTodo(event, text = undefined) {
 }
 
 function storeTodoItem(todo) {
-	let todos = JSON.parse(localStorage.getItem("todos")) ?? [];
-	todos.push(todo);
-	localStorage.setItem("todos", JSON.stringify(todos));
+	let todos = getStoredTodos();
+	todos[todo] = "";
+	saveToStorage(todos);
 }
 
 function deleteTodoItem(todo) {
-	let todos = JSON.parse(localStorage.getItem("todos")) ?? [];
-	let index = todos.indexOf(todo);
+	let todos = getStoredTodos();
+	delete todos[todo.children[0].innerText];
+	saveToStorage(todos);
+}
 
-	todos.splice(index, 1);
+function updateTodoClass(todo) {
+	let todos = getStoredTodos();
+	let current = todo.children[0].innerText;
+	todos[current] = todos[current] === "" ? "checked" : "";
+}
+
+function getStoredTodos() {
+	let todos = JSON.parse(localStorage.getItem("todos"));
+	return todos;
+}
+
+function saveToStorage(todos) {
 	localStorage.setItem("todos", JSON.stringify(todos));
 }
