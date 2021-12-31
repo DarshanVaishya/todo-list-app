@@ -3,9 +3,10 @@
 const todoInput = document.querySelector(".todo-input");
 const addBtn = document.querySelector(".addBtn");
 const todoItems = document.querySelector(".todo-items");
+const todoFilter = document.querySelector(".todo-filter");
 
+document.addEventListener("DOMContentLoaded", loadTodos);
 addBtn.addEventListener("click", addTodo);
-
 todoItems.addEventListener("click", (event) => {
 	let item = event.target;
 	let todo = item.parentElement;
@@ -19,14 +20,29 @@ todoItems.addEventListener("click", (event) => {
 		deleteTodoItem(todo);
 	}
 });
-
-function loadTodos() {
-	let todos = getStoredTodos();
-	for (let [todo, isCompleted] of Object.entries(todos)) {
-		addTodo(undefined, todo, isCompleted);
+todoFilter.addEventListener("click", () => {
+	let todos = document.querySelectorAll(".todo");
+	switch (todoFilter.value) {
+		case "all":
+			todos.forEach((todo) => {
+				todo.style.display = "flex";
+			});
+			break;
+		case "completed":
+			todos.forEach((todo) => {
+				if (!todo.classList.contains("checked")) todo.style.display = "none";
+				else todo.style.display = "flex";
+			});
+			break;
+		case "remaining":
+			todos.forEach((todo) => {
+				if (todo.classList.contains("checked")) todo.style.display = "none";
+				else todo.style.display = "flex";
+			});
+			break;
 	}
-}
-loadTodos();
+});
+
 function addTodo(event, text = undefined, completed = "") {
 	if (event) event.preventDefault();
 	if (event && !todoInput.value) return;
@@ -62,13 +78,20 @@ function updateTodoClass(todo) {
 	let todos = getStoredTodos();
 	let current = todo.children[0].innerText;
 	todos[current] = todos[current] === "" ? "checked" : "";
+	saveToStorage(todos);
 }
 
 function getStoredTodos() {
-	let todos = JSON.parse(localStorage.getItem("todos"));
-	return todos;
+	return JSON.parse(localStorage.getItem("todos")) ?? {};
 }
 
 function saveToStorage(todos) {
 	localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function loadTodos() {
+	let todos = getStoredTodos();
+	for (let [todo, isCompleted] of Object.entries(todos)) {
+		addTodo(undefined, todo, isCompleted);
+	}
 }
