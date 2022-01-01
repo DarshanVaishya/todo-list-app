@@ -20,13 +20,12 @@ todoItems.addEventListener("click", (event) => {
 		deleteTodoItem(todo);
 	}
 });
-todoFilter.addEventListener("click", () => {
+
+todoFilter.addEventListener("change", () => {
 	let todos = document.querySelectorAll(".todo");
 	switch (todoFilter.value) {
 		case "all":
-			todos.forEach((todo) => {
-				todo.style.display = "flex";
-			});
+			todos.forEach((todo) => (todo.style.display = "flex"));
 			break;
 		case "completed":
 			todos.forEach((todo) => {
