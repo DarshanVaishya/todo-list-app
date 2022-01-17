@@ -12,7 +12,7 @@ body {
 	background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
 
 	color: white;
-	height: 100vh;
+	min-height: 100vh;
 
 	overflow-x: hidden;
 }
@@ -41,6 +41,7 @@ main {
 	margin-top: 2rem;
 	justify-content: flex-start;
 	position: relative;
+	min-height: 50vh;
 }
 
 form {
@@ -142,6 +143,21 @@ form > *,
 	color: #777;
 
 	width: 175px;
+}
+
+footer {
+	/* position: fixed;
+	bottom: 1rem;
+	left: 50%;
+	transform: translateX(-50%); */
+	text-align: center;
+	margin: 5rem 0 1rem 0;
+}
+
+@media (max-width: 768px) {
+	html {
+		font-size: 90%;
+	}
 }
 
 @media (max-width: 410px) {
