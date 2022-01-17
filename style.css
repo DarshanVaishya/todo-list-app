@@ -8,9 +8,13 @@
 
 body {
 	font-family: sans-serif;
-	background: linear-gradient(120deg, #1864ab, #5f3dc4);
+	background-color: #20bf55;
+	background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+
 	color: white;
 	height: 100vh;
+
+	overflow-x: hidden;
 }
 
 .container {
@@ -73,7 +77,11 @@ form > *,
 	list-style: none;
 	margin-bottom: 7px;
 
-	transition: all 1s ease;
+	transition: all 0.7s ease;
+}
+
+.todo:hover {
+	transform: translateY(-5px);
 }
 
 .todo:hover {
@@ -99,8 +107,16 @@ form > *,
 	pointer-events: none;
 }
 
+.hidden {
+	visibility: hidden;
+	opacity: 0;
+}
+
 .fall {
-	transform: translateY(15rem) rotateZ(30deg);
+	transition: all 1s ease;
+
+	transform: translate(100%, -5px) !important;
+	visibility: hidden;
 	opacity: 0;
 }
 
@@ -109,7 +125,7 @@ form > *,
 }
 
 .todo:hover {
-	box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.2);
 }
 
 .todo-filter {

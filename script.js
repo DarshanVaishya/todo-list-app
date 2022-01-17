@@ -16,7 +16,10 @@ todoItems.addEventListener("click", (event) => {
 		updateTodoClass(todo);
 	} else if (item.classList[1] === "deleteBtn") {
 		todo.classList.add("fall");
-		todo.addEventListener("transitionend", todo.remove);
+		todo.addEventListener("transitionend", (e) => {
+			if (todo !== e.target) return;
+			todo.remove();
+		});
 		deleteTodoItem(todo);
 	}
 });
@@ -45,18 +48,22 @@ todoFilter.addEventListener("change", () => {
 function addTodo(event, text = undefined, completed = "") {
 	if (event) event.preventDefault();
 	if (event && !todoInput.value) return;
-	let todo = `
-  <div class="todo ${completed}">
+
+	let todo = document.createElement("div");
+	todo.classList.add("todo", "hidden");
+	if (completed) todo.classList.add(completed);
+	todo.innerHTML = `
 		<li class="item">${text ?? todoInput.value}</li>
     <button class="btn checkBtn">
       <i class="fas fa-check"></i>
     </button>
     <button class="btn deleteBtn">
       <i class="fas fa-trash-alt"></i>
-    </button>
-  </div>`;
+    </button>`;
 	if (event) storeTodoItem(text ?? todoInput.value);
-	todoItems.innerHTML += todo;
+	todoItems.append(todo);
+	setTimeout(() => todo.classList.toggle("hidden"), 10);
+
 	todoInput.value = "";
 	todoInput.focus();
 }
