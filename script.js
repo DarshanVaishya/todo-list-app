@@ -49,7 +49,7 @@ function addTodo(event, text = undefined, completed = "") {
 	if (event) event.preventDefault();
 	if (event && !todoInput.value) return;
 
-	let todo = document.createElement("div");
+	const todo = document.createElement("div");
 	todo.classList.add("todo", "hidden");
 	if (completed) todo.classList.add(completed);
 	todo.innerHTML = `

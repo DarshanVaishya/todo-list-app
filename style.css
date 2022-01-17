@@ -114,10 +114,10 @@ form > *,
 	opacity: 0;
 }
 
-.fall {
+.todo.fall {
 	transition: all 1s ease;
 
-	transform: translate(100%, -5px) !important;
+	transform: translate(100%, -5px);
 	visibility: hidden;
 	opacity: 0;
 }
@@ -146,12 +146,18 @@ form > *,
 }
 
 footer {
-	/* position: fixed;
-	bottom: 1rem;
-	left: 50%;
-	transform: translateX(-50%); */
 	text-align: center;
 	margin: 5rem 0 1rem 0;
+}
+
+footer a {
+	color: white;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+footer a:hover {
+	text-decoration: underline;
 }
 
 @media (max-width: 768px) {

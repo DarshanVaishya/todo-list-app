@@ -1,6 +1,6 @@
 # Todo list app
 
-A todo list app which stores your todo lists in localstorage with options of marking them as complete or deleting them from the list. It has a beautiful and easy to navigate user interface. This project uses HTML, CSS and JS to implement all this.
+A todo list app which stores your todo lists in local storage with options of marking them as complete or deleting them from the list. Users can also filter through the todos. It has a beautiful and easy to navigate user interface. This project uses HTML, CSS and JS to implement all this.
 
 Live preview: [Link](https://tdl.darshanvaishya.xyz/)
 
@@ -11,3 +11,17 @@ Live preview: [Link](https://tdl.darshanvaishya.xyz/)
 - HTML
 - CSS
 - JavaScript
+
+## Screenshots
+
+### Main screen
+
+![Main](./img/all.png)
+
+### Complted todos
+
+![Main](./img/completed.png)
+
+### Remaining todos
+
+![Main](./img/remaining.png)
