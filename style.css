@@ -79,7 +79,7 @@ form > *,
 	list-style: none;
 	margin-bottom: 7px;
 
-	transition: all 0.7s ease;
+	transition: all 0.3s linear;
 }
 
 .todo:hover {
@@ -127,7 +127,7 @@ form > *,
 }
 
 .todo:hover {
-	box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.15);
 }
 
 .todo-filter {
