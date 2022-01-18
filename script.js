@@ -17,7 +17,7 @@ todoItems.addEventListener("click", (event) => {
 	} else if (item.classList[1] === "deleteBtn") {
 		todo.classList.add("fall");
 		todo.addEventListener("transitionend", (e) => {
-			if (todo !== e.target) return;
+			if (todo !== e.target || e.elapsedTime !== 1) return;
 			todo.remove();
 		});
 		deleteTodoItem(todo);
